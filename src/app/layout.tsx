@@ -39,7 +39,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-background font-sans antialiased`}>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <div vaul-drawer-wrapper="" className="min-h-screen bg-background">
+            {children}
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );
