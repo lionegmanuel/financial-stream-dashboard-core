@@ -1,32 +1,36 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 
 import { ThemeProvider } from "@/components/theme-provider";
 
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"]
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  display: "swap"
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"]
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  display: "swap"
 });
 
 export const metadata: Metadata = {
-  title: "Financial Stream Dashboard",
-  description: "Dashboard financiero de alto rendimiento con streaming SSE, escenarios de tesoreria y AI Copilot."
+  title: "Financial Stream Dashboard · Velinex",
+  description: "Dashboard financiero de alto rendimiento con streaming SSE, escenarios de tesorería y AI Copilot."
 };
 
 const THEME_INIT_SCRIPT = `
 (function () {
   try {
     var stored = window.localStorage.getItem("financial-stream-dashboard-theme");
-    var theme = stored || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+    var theme = stored || "dark";
     if (theme === "dark") {
       document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
     }
   } catch (error) {}
 })();
@@ -34,11 +38,11 @@ const THEME_INIT_SCRIPT = `
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="es" suppressHydrationWarning>
+    <html lang="es" className="dark" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-background font-sans antialiased`}>
+      <body className={`${inter.variable} ${jetbrainsMono.variable} min-h-screen bg-background font-sans text-foreground antialiased selection:bg-emerald-500/20 selection:text-emerald-300`}>
         <ThemeProvider>
           <div vaul-drawer-wrapper="" className="min-h-screen bg-background">
             {children}

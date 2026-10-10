@@ -99,3 +99,26 @@ export type BurnRateCategoryBreakdown = z.infer<typeof BurnRateCategoryBreakdown
 
 export const DateRangePresetSchema = z.enum(["30d", "60d", "90d"]);
 export type DateRangePreset = z.infer<typeof DateRangePresetSchema>;
+
+// Esquemas de Eventos de Streaming SSE para Copilot
+export const CopilotStreamTokenSchema = z.object({
+  token: z.string()
+});
+export type CopilotStreamToken = z.infer<typeof CopilotStreamTokenSchema>;
+
+export const CopilotStreamDoneSchema = z.object({
+  done: z.literal(true)
+});
+export type CopilotStreamDone = z.infer<typeof CopilotStreamDoneSchema>;
+
+export const CopilotStreamErrorSchema = z.object({
+  error: z.string()
+});
+export type CopilotStreamError = z.infer<typeof CopilotStreamErrorSchema>;
+
+export const CopilotStreamEventSchema = z.union([
+  CopilotStreamTokenSchema,
+  CopilotStreamDoneSchema,
+  CopilotStreamErrorSchema
+]);
+export type CopilotStreamEvent = z.infer<typeof CopilotStreamEventSchema>;

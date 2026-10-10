@@ -16,15 +16,17 @@ interface DateRangeFilterProps {
 
 export function DateRangeFilter({ value, onChange }: DateRangeFilterProps) {
   return (
-    <div className="inline-flex items-center rounded-md border border-border bg-muted/50 p-1" role="group" aria-label="Selector de periodo">
+    <div className="inline-flex items-center rounded-xl border border-white/[0.08] bg-white/[0.03] p-1" role="group" aria-label="Selector de periodo">
       {RANGES.map((range) => (
         <button
           key={range.value}
           type="button"
           onClick={() => onChange(range.value)}
           className={cn(
-            "rounded-sm px-3 py-1.5 text-xs font-medium transition-colors",
-            value === range.value ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"
+            "rounded-lg px-3 py-1.5 text-xs font-medium transition-all duration-200",
+            value === range.value
+              ? "border border-white/[0.08] bg-white/10 font-semibold text-[#f8fafc] shadow-sm"
+              : "text-slate-400 hover:text-[#f8fafc]"
           )}
           aria-pressed={value === range.value}
         >

@@ -56,16 +56,28 @@ const config: Config = {
         warning: {
           DEFAULT: "hsl(var(--warning))",
           foreground: "hsl(var(--warning-foreground))"
+        },
+        brand: {
+          dark: "#0b0f17",
+          card: "#111827",
+          surface: "#0f172a",
+          emerald: "#10b981",
+          sky: "#38bdf8",
+          text: "#f8fafc",
+          muted: "#94a3b8",
+          danger: "#ef4444"
         }
       },
       borderRadius: {
+        "2xl": "1rem",
+        xl: "0.75rem",
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)"
       },
       fontFamily: {
-        sans: ["var(--font-geist-sans)", "system-ui", "sans-serif"],
-        mono: ["var(--font-geist-mono)", "ui-monospace", "monospace"]
+        sans: ["var(--font-inter)", "Inter", "system-ui", "-apple-system", "sans-serif"],
+        mono: ["var(--font-mono)", "JetBrains Mono", "ui-monospace", "monospace"]
       },
       keyframes: {
         "accordion-down": {

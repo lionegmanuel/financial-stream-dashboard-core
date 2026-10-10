@@ -45,17 +45,22 @@ export function RecentTransactionsTable({ transactions }: { transactions: Transa
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">
-        <CardTitle className="text-base text-foreground">Transacciones Recientes</CardTitle>
-        <div className="flex items-center gap-1">
+        <CardTitle className="text-base font-bold tracking-tight text-[#f8fafc]">Transacciones Recientes</CardTitle>
+        <div className="inline-flex items-center rounded-xl border border-white/[0.08] bg-white/[0.03] p-1">
           {(["all", "income", "expense"] as const).map((option) => (
-            <Button
+            <button
               key={option}
-              variant={filter === option ? "secondary" : "ghost"}
-              size="sm"
+              type="button"
               onClick={() => handleFilterChange(option)}
+              className={cn(
+                "rounded-lg px-3 py-1.5 text-xs font-medium transition-all duration-200",
+                filter === option
+                  ? "border border-white/[0.08] bg-white/10 font-semibold text-[#f8fafc] shadow-sm"
+                  : "text-slate-400 hover:text-[#f8fafc]"
+              )}
             >
               {option === "all" ? "Todas" : option === "income" ? "Ingresos" : "Egresos"}
-            </Button>
+            </button>
           ))}
         </div>
       </CardHeader>
@@ -63,27 +68,27 @@ export function RecentTransactionsTable({ transactions }: { transactions: Transa
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-border text-left text-xs text-muted-foreground">
-                <th className="pb-2 font-medium">Fecha</th>
-                <th className="pb-2 font-medium">Descripcion</th>
-                <th className="pb-2 font-medium">Categoria</th>
-                <th className="pb-2 font-medium">Contraparte</th>
-                <th className="pb-2 text-right font-medium">Monto</th>
+              <tr className="border-b border-white/[0.08] text-left text-xs font-semibold text-slate-400">
+                <th className="pb-3 font-semibold">Fecha</th>
+                <th className="pb-3 font-semibold">Descripción</th>
+                <th className="pb-3 font-semibold">Categoría</th>
+                <th className="pb-3 font-semibold">Contraparte</th>
+                <th className="pb-3 text-right font-semibold">Monto</th>
               </tr>
             </thead>
             <tbody>
               {pageItems.map((transaction) => (
-                <tr key={transaction.id} className="border-b border-border/60 last:border-0">
-                  <td className="py-2.5 font-mono text-xs tabular-nums text-muted-foreground">{transaction.date}</td>
-                  <td className="py-2.5">{transaction.description}</td>
-                  <td className="py-2.5">
+                <tr key={transaction.id} className="border-b border-white/[0.05] transition-colors hover:bg-white/[0.02] last:border-0">
+                  <td className="py-3 font-mono text-xs tabular-nums text-slate-400">{transaction.date}</td>
+                  <td className="py-3 font-medium text-slate-200">{transaction.description}</td>
+                  <td className="py-3">
                     <Badge variant="outline">{CATEGORY_LABELS[transaction.category]}</Badge>
                   </td>
-                  <td className="py-2.5 text-muted-foreground">{transaction.counterparty}</td>
+                  <td className="py-3 text-slate-400">{transaction.counterparty}</td>
                   <td
                     className={cn(
-                      "py-2.5 text-right font-mono tabular-nums",
-                      transaction.type === "income" ? "text-success" : "text-destructive"
+                      "py-3 text-right font-mono font-bold tabular-nums",
+                      transaction.type === "income" ? "text-emerald-400" : "text-rose-400"
                     )}
                   >
                     {transaction.type === "income" ? "+" : "-"}
@@ -93,7 +98,7 @@ export function RecentTransactionsTable({ transactions }: { transactions: Transa
               ))}
               {pageItems.length === 0 && (
                 <tr>
-                  <td colSpan={5} className="py-8 text-center text-muted-foreground">
+                  <td colSpan={5} className="py-8 text-center text-slate-400">
                     No hay transacciones para este filtro.
                   </td>
                 </tr>
@@ -101,9 +106,9 @@ export function RecentTransactionsTable({ transactions }: { transactions: Transa
             </tbody>
           </table>
         </div>
-        <div className="mt-4 flex items-center justify-between text-xs text-muted-foreground">
+        <div className="mt-4 flex items-center justify-between text-xs text-slate-400">
           <span>
-            Pagina {currentPage + 1} de {totalPages} ({filtered.length} registros)
+            Página {currentPage + 1} de {totalPages} ({filtered.length} registros)
           </span>
           <div className="flex gap-2">
             <Button
